@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Select Your Backpack</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f7f9;
+    }
+
+    header {
+      background: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    h1 {
+      color: #1BA0D7;
+      font-size: 20px;
+    }
+
+    .logo {
+      height: 35px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .card.selected {
+      border: 2px solid #1BA0D7;
+    }
+
+    .card img {
+      height: 160px;
+      object-fit: contain;
+    }
+
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 30px;
+    }
+
+    input {
+      width: 48%;
+      padding: 10px;
+      margin: 5px 1%;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 12px;
+      background: #1BA0D7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Select Your Backpack</h1>
+  <img src="digital-realty.png" class="logo" />
+</header>
+
+<div class="container">
+
+  <div class="grid" id="grid">
+    <div class="card" onclick="selectCard(this, 'OGIO Shuttle')">
+      <img src="ogio.png">
+      <p>Core OGIO Shuttle Backpack – Black</p>
+    </div>
+
+    <div class="card" onclick="selectCard(this, 'North Face Dyno')">
+      <img src="dyno.png">
+      <p>Core North Face Dyno – Black</p>
+    </div>
+
+    <div class="card" onclick="selectCard(this, 'North Face Fall Line')">
+      <img src="fallline.png">
+      <p>Core North Face Fall Line – Navy</p>
+    </div>
+
+    <div class="card" onclick="selectCard(this, 'Mercur')">
+      <img src="mercur.png">
+      <p>Mercur Backpack</p>
+    </div>
+
+    <div class="card" onclick="selectCard(this, 'Commuter')">
+      <img src="commuter.png">
+      <p>Core Commuter Backpack – Black</p>
+    </div>
+  </div>
+
+  <form onsubmit="submitForm(event)">
+    <input placeholder="Full Name" required>
+    <input placeholder="Email" required>
+    <input placeholder="Phone Number" required>
+    <input placeholder="Shipping Address" required>
+    <button type="submit">Submit Selection</button>
+  </form>
+
+</div>
+
+<script>
+  let selected = "";
+
+  function selectCard(element, name) {
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+    element.classList.add('selected');
+    selected = name;
+  }
+
+  function submitForm(e) {
+    e.preventDefault();
+
+    if (!selected) {
+      alert("Please select a backpack");
+      return;
+    }
+
+    alert("Submitted! You selected: " + selected);
+  }
+</script>
+
+</body>
+</html>

@@ -296,7 +296,7 @@
     <div class="grid">
       <div class="card" onclick="selectCard(this, 'Core OGIO Shuttle Backpack - Black')">
         <div class="image-box">
-          <img src="Ogio.png" alt="Core OGIO Shuttle Backpack - Black" />
+          <img data-src="Ogio.png" alt="Core OGIO Shuttle Backpack - Black" />
         </div>
         <p class="pack-title">Core OGIO Shuttle Backpack - Black</p>
         <div class="selected-pill">Selected</div>
@@ -304,7 +304,7 @@
 
       <div class="card" onclick="selectCard(this, 'Core North Face Dyno Backpack - Black')">
         <div class="image-box">
-          <img src="Dyno.png" alt="Core North Face Dyno Backpack - Black" />
+          <img data-src="Dyno.png" alt="Core North Face Dyno Backpack - Black" />
         </div>
         <p class="pack-title">Core North Face Dyno Backpack - Black</p>
         <div class="selected-pill">Selected</div>
@@ -312,7 +312,7 @@
 
       <div class="card" onclick="selectCard(this, 'Core North Face Fall Line Backpack - Navy')">
         <div class="image-box">
-          <img src="Fallline.png" alt="Core North Face Fall Line Backpack - Navy" />
+          <img data-src="Fallline.png" alt="Core North Face Fall Line Backpack - Navy" />
         </div>
         <p class="pack-title">Core North Face Fall Line Backpack - Navy</p>
         <div class="selected-pill">Selected</div>
@@ -320,7 +320,7 @@
 
       <div class="card" onclick="selectCard(this, 'Mercur Backpack')">
         <div class="image-box">
-          <img src="Mercur.png" alt="Mercur Backpack" />
+          <img data-src="Mercur.png" alt="Mercur Backpack" />
         </div>
         <p class="pack-title">Mercur Backpack</p>
         <div class="selected-pill">Selected</div>
@@ -328,7 +328,7 @@
 
       <div class="card" onclick="selectCard(this, 'Core Commuter Backpack - Black')">
         <div class="image-box">
-          <img src="Commuter.png" alt="Core Commuter Backpack - Black" />
+          <img data-src="Commuter.png" alt="Core Commuter Backpack - Black" />
         </div>
         <p class="pack-title">Core Commuter Backpack - Black</p>
         <div class="selected-pill">Selected</div>
@@ -370,6 +370,34 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
+    function setImageWithFallback(img) {
+      const fileName = img.getAttribute('data-src');
+      const candidates = [
+        fileName,
+        './' + fileName,
+        '/' + fileName,
+        'images/' + fileName,
+        './images/' + fileName,
+        'assets/' + fileName,
+        './assets/' + fileName
+      ];
+
+      let attempt = 0;
+
+      function tryNext() {
+        if (attempt >= candidates.length) {
+          img.style.display = 'none';
+          return;
+        }
+        img.src = candidates[attempt++];
+      }
+
+      img.onerror = tryNext;
+      tryNext();
+    }
+
+    document.querySelectorAll('img[data-src]').forEach(setImageWithFallback);
+
     const PUBLIC_KEY = "PASTE_YOUR_PUBLIC_KEY_HERE";
     const SERVICE_ID = "PASTE_YOUR_SERVICE_ID_HERE";
     const TEMPLATE_ID = "PASTE_YOUR_TEMPLATE_ID_HERE";

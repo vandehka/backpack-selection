@@ -7,12 +7,25 @@
       margin: 0;
       font-family: Arial, sans-serif;
       background: #f4f6f8;
-      padding: 50px 20px;
+    }
+
+    header {
+      background: white;
+      padding: 18px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e1e6eb;
+    }
+
+    .logo {
+      height: 34px;
     }
 
     .container {
       max-width: 1100px;
       margin: auto;
+      padding: 40px 20px;
     }
 
     .grid {
@@ -23,7 +36,7 @@
 
     .card {
       background: white;
-      padding: 20px;
+      padding: 18px;
       border-radius: 16px;
       text-align: center;
       cursor: pointer;
@@ -44,8 +57,27 @@
 
     .card img {
       max-width: 100%;
-      height: 190px;
+      height: 180px;
       object-fit: contain;
+    }
+
+    .card-title {
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1b1f23;
+    }
+
+    .selected-indicator {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #1BA0D7;
+      font-weight: 600;
+      opacity: 0;
+    }
+
+    .card.selected .selected-indicator {
+      opacity: 1;
     }
 
     textarea {
@@ -76,25 +108,13 @@
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease;
       box-shadow: 0 6px 16px rgba(15,108,189,0.25);
+      transition: all 0.2s ease;
     }
 
     button:hover {
       transform: translateY(-1px);
       box-shadow: 0 10px 22px rgba(15,108,189,0.35);
-    }
-
-    .selected-indicator {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #1BA0D7;
-      font-weight: 600;
-      opacity: 0;
-    }
-
-    .card.selected .selected-indicator {
-      opacity: 1;
     }
 
     @media (max-width: 900px) {
@@ -113,6 +133,11 @@
 
 <body>
 
+<header>
+  <img src="digital-realty.png" class="logo">
+  <img src="cisco.png" class="logo">
+</header>
+
 <div class="container">
 
 <form action="https://formspree.io/f/xzdyrrjq" method="POST">
@@ -120,33 +145,40 @@
   <input type="hidden" name="Backpack Choice" id="backpack_choice">
 
   <div class="grid">
-    <div class="card" onclick="selectCard(this, 'OGIO Shuttle')">
+
+    <div class="card" onclick="selectCard(this, 'Core OGIO Shuttle Backpack - Black')">
       <img src="Ogio.png">
+      <div class="card-title">Core OGIO Shuttle Backpack - Black</div>
       <div class="selected-indicator">Selected</div>
     </div>
 
-    <div class="card" onclick="selectCard(this, 'Dyno')">
+    <div class="card" onclick="selectCard(this, 'Core North Face Dyno Backpack - Black')">
       <img src="Dyno.png">
+      <div class="card-title">Core North Face Dyno Backpack - Black</div>
       <div class="selected-indicator">Selected</div>
     </div>
 
-    <div class="card" onclick="selectCard(this, 'Fall Line')">
+    <div class="card" onclick="selectCard(this, 'Core North Face Fall Line Backpack - Navy')">
       <img src="Fallline.png">
+      <div class="card-title">Core North Face Fall Line Backpack - Navy</div>
       <div class="selected-indicator">Selected</div>
     </div>
 
-    <div class="card" onclick="selectCard(this, 'Mercur')">
+    <div class="card" onclick="selectCard(this, 'Mercur Backpack')">
       <img src="Mercur.png">
+      <div class="card-title">Mercur Backpack</div>
       <div class="selected-indicator">Selected</div>
     </div>
 
-    <div class="card" onclick="selectCard(this, 'Commuter')">
+    <div class="card" onclick="selectCard(this, 'Core Commuter Backpack - Black')">
       <img src="Commuter.png">
+      <div class="card-title">Core Commuter Backpack - Black</div>
       <div class="selected-indicator">Selected</div>
     </div>
+
   </div>
 
-  <textarea name="Shipping Address" placeholder="Enter mailing address" rows="4" required></textarea>
+  <textarea name="Shipping Address" placeholder="Shipping address" rows="4" required></textarea>
 
   <button type="submit">Submit</button>
 

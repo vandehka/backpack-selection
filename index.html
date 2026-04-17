@@ -9,6 +9,16 @@
       background: #f4f6f8;
     }
 
+    /* 🔵 Top blue bar */
+    .top-bar {
+      background: linear-gradient(135deg, #1BA0D7, #0f6cbd);
+      color: white;
+      text-align: center;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
     header {
       background: white;
       padding: 20px 30px;
@@ -19,7 +29,7 @@
     }
 
     .logo {
-      height: 44px; /* bigger */
+      height: 44px;
     }
 
     .container {
@@ -133,6 +143,11 @@
 
 <body>
 
+<!-- 🔵 Blue bar -->
+<div class="top-bar">
+  Please choose a backpack
+</div>
+
 <header>
   <img src="./digital-realty.png" class="logo" alt="Digital Realty">
   <img src="./cisco.png" class="logo" alt="Cisco">
@@ -178,7 +193,7 @@
 
   </div>
 
-  <textarea name="Shipping Address" placeholder="Shipping address" rows="4" required></textarea>
+  <textarea name="Shipping Address" placeholder="Please enter shipping address and submit" rows="4" required></textarea>
 
   <button type="submit">Submit</button>
 

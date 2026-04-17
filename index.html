@@ -2,157 +2,434 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Select Your Backpack</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cisco Backpack Selection</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      background: #f5f7f9;
+      font-family: Arial, sans-serif;
+      background: #f3f5f7;
+      color: #1b1f23;
     }
 
     header {
-      background: white;
-      padding: 15px 30px;
+      background: #ffffff;
+      padding: 20px 28px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border-bottom: 1px solid #dde3e8;
     }
 
-    h1 {
-      color: #1BA0D7;
-      font-size: 20px;
+    .brand-logo {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+      display: block;
     }
 
-    .logo {
-      height: 35px;
+    .page-wrap {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 36px 32px 56px;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 30px auto;
-      padding: 20px;
+    .hero {
+      background: linear-gradient(135deg, #0f6cbd 0%, #19b5fe 100%);
+      color: white;
+      border-radius: 28px;
+      padding: 34px 36px;
+      box-shadow: 0 16px 40px rgba(15, 108, 189, 0.14);
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.15;
+    }
+
+    .hero p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 780px;
+    }
+
+    .section-heading {
+      margin: 0 0 8px;
+      font-size: 24px;
+      color: #15202b;
+    }
+
+    .section-copy {
+      margin: 0 0 24px;
+      color: #5d6b78;
+      line-height: 1.5;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      margin-bottom: 34px;
     }
 
     .card {
-      background: white;
-      padding: 15px;
-      border-radius: 12px;
-      text-align: center;
-      cursor: pointer;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 10px 28px rgba(16, 24, 40, 0.06);
       border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(16, 24, 40, 0.1);
     }
 
     .card.selected {
-      border: 2px solid #1BA0D7;
+      border-color: #19b5fe;
+      box-shadow: 0 0 0 4px rgba(25, 181, 254, 0.12);
     }
 
-    .card img {
-      height: 160px;
+    .image-box {
+      height: 250px;
+      background: #f8fafc;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      max-height: 100%;
       object-fit: contain;
+      display: block;
     }
 
-    form {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-top: 30px;
+    .pack-title {
+      margin: 0;
+      text-align: center;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: #111827;
     }
 
-    input {
-      width: 48%;
-      padding: 10px;
-      margin: 5px 1%;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+    .selected-pill {
+      margin: 14px auto 0;
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #edf8ff;
+      color: #0f6cbd;
+      font-size: 13px;
+      font-weight: 700;
+      opacity: 0;
     }
 
-    button {
-      margin-top: 15px;
+    .card.selected .selected-pill {
+      opacity: 1;
+    }
+
+    .form-wrap {
+      background: #ffffff;
+      border-radius: 26px;
+      padding: 28px;
+      box-shadow: 0 14px 36px rgba(16, 24, 40, 0.07);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #33414d;
+    }
+
+    input, textarea {
       width: 100%;
-      padding: 12px;
-      background: #1BA0D7;
-      color: white;
+      padding: 14px 15px;
+      border-radius: 12px;
+      border: 1px solid #c9d6e2;
+      font-size: 15px;
+      font-family: inherit;
+      background: #fff;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #19b5fe;
+      box-shadow: 0 0 0 4px rgba(25, 181, 254, 0.12);
+    }
+
+    .submit-btn {
+      margin-top: 24px;
+      width: 100%;
       border: none;
-      border-radius: 8px;
+      border-radius: 14px;
+      padding: 16px 18px;
       font-size: 16px;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, #0f6cbd 0%, #19b5fe 100%);
       cursor: pointer;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .status {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .status.success {
+      display: block;
+      background: #ecfdf3;
+      color: #117a47;
+      border: 1px solid #b7ebcc;
+    }
+
+    .status.error {
+      display: block;
+      background: #fff3f2;
+      color: #b42318;
+      border: 1px solid #f7c1bc;
+    }
+
+    @media (max-width: 980px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 18px;
+      }
+
+      .brand-logo {
+        height: 30px;
+      }
+
+      .page-wrap {
+        padding: 20px 16px 40px;
+      }
+
+      .hero {
+        padding: 24px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .image-box {
+        height: 220px;
+      }
     }
   </style>
 </head>
-
 <body>
+  <header>
+    <img src="digital-realty.png" alt="Digital Realty" class="brand-logo" />
+    <img src="cisco.png" alt="Cisco" class="brand-logo" />
+  </header>
 
-<header>
-  <h1>Select Your Backpack</h1>
-  <img src="digital-realty.png" class="logo" />
-</header>
+  <div class="page-wrap">
+    <section class="hero">
+      <h1>Choose your backpack</h1>
+      <p>
+        Please select one backpack option below and enter your shipping details.
+        Once submitted, your selection will be emailed for fulfillment.
+      </p>
+    </section>
 
-<div class="container">
+    <h2 class="section-heading">Backpack Options</h2>
+    <p class="section-copy">Click one option to make your selection.</p>
 
-  <div class="grid" id="grid">
-    <div class="card" onclick="selectCard(this, 'OGIO Shuttle')">
-      <img src="ogio.png">
-      <p>Core OGIO Shuttle Backpack – Black</p>
+    <div class="grid">
+      <div class="card" onclick="selectCard(this, 'Core OGIO Shuttle Backpack - Black')">
+        <div class="image-box">
+          <img src="ogio.png" alt="Core OGIO Shuttle Backpack - Black" />
+        </div>
+        <p class="pack-title">Core OGIO Shuttle Backpack - Black</p>
+        <div class="selected-pill">Selected</div>
+      </div>
+
+      <div class="card" onclick="selectCard(this, 'Core North Face Dyno Backpack - Black')">
+        <div class="image-box">
+          <img src="dyno.png" alt="Core North Face Dyno Backpack - Black" />
+        </div>
+        <p class="pack-title">Core North Face Dyno Backpack - Black</p>
+        <div class="selected-pill">Selected</div>
+      </div>
+
+      <div class="card" onclick="selectCard(this, 'Core North Face Fall Line Backpack - Navy')">
+        <div class="image-box">
+          <img src="fallline.png" alt="Core North Face Fall Line Backpack - Navy" />
+        </div>
+        <p class="pack-title">Core North Face Fall Line Backpack - Navy</p>
+        <div class="selected-pill">Selected</div>
+      </div>
+
+      <div class="card" onclick="selectCard(this, 'Mercur Backpack')">
+        <div class="image-box">
+          <img src="mercur.png" alt="Mercur Backpack" />
+        </div>
+        <p class="pack-title">Mercur Backpack</p>
+        <div class="selected-pill">Selected</div>
+      </div>
+
+      <div class="card" onclick="selectCard(this, 'Core Commuter Backpack - Black')">
+        <div class="image-box">
+          <img src="commuter.png" alt="Core Commuter Backpack - Black" />
+        </div>
+        <p class="pack-title">Core Commuter Backpack - Black</p>
+        <div class="selected-pill">Selected</div>
+      </div>
     </div>
 
-    <div class="card" onclick="selectCard(this, 'North Face Dyno')">
-      <img src="dyno.png">
-      <p>Core North Face Dyno – Black</p>
-    </div>
+    <div class="form-wrap">
+      <h2 class="section-heading">Shipping Information</h2>
+      <p class="section-copy">Enter your details below to submit your selection.</p>
 
-    <div class="card" onclick="selectCard(this, 'North Face Fall Line')">
-      <img src="fallline.png">
-      <p>Core North Face Fall Line – Navy</p>
-    </div>
+      <form id="backpack-form">
+        <div class="form-grid">
+          <div class="field">
+            <label for="customer_name">Full Name</label>
+            <input id="customer_name" name="customer_name" type="text" required />
+          </div>
 
-    <div class="card" onclick="selectCard(this, 'Mercur')">
-      <img src="mercur.png">
-      <p>Mercur Backpack</p>
-    </div>
+          <div class="field">
+            <label for="customer_email">Email</label>
+            <input id="customer_email" name="customer_email" type="email" required />
+          </div>
 
-    <div class="card" onclick="selectCard(this, 'Commuter')">
-      <img src="commuter.png">
-      <p>Core Commuter Backpack – Black</p>
+          <div class="field">
+            <label for="customer_phone">Phone Number</label>
+            <input id="customer_phone" name="customer_phone" type="text" required />
+          </div>
+
+          <div class="field full">
+            <label for="customer_address">Shipping Address</label>
+            <textarea id="customer_address" name="customer_address" rows="3" required></textarea>
+          </div>
+        </div>
+
+        <button class="submit-btn" id="submit-btn" type="submit">Submit Selection</button>
+        <div id="form-status" class="status"></div>
+      </form>
     </div>
   </div>
 
-  <form onsubmit="submitForm(event)">
-    <input placeholder="Full Name" required>
-    <input placeholder="Email" required>
-    <input placeholder="Phone Number" required>
-    <input placeholder="Shipping Address" required>
-    <button type="submit">Submit Selection</button>
-  </form>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    const PUBLIC_KEY = "PASTE_YOUR_PUBLIC_KEY_HERE";
+    const SERVICE_ID = "PASTE_YOUR_SERVICE_ID_HERE";
+    const TEMPLATE_ID = "PASTE_YOUR_TEMPLATE_ID_HERE";
 
-</div>
+    emailjs.init({ publicKey: PUBLIC_KEY });
 
-<script>
-  let selected = "";
+    let selectedBackpack = "";
 
-  function selectCard(element, name) {
-    document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
-    element.classList.add('selected');
-    selected = name;
-  }
-
-  function submitForm(e) {
-    e.preventDefault();
-
-    if (!selected) {
-      alert("Please select a backpack");
-      return;
+    function selectCard(element, backpackName) {
+      document.querySelectorAll('.card').forEach(card => card.classList.remove('selected'));
+      element.classList.add('selected');
+      selectedBackpack = backpackName;
     }
 
-    alert("Submitted! You selected: " + selected);
-  }
-</script>
+    document.getElementById('backpack-form').addEventListener('submit', function(event) {
+      event.preventDefault();
 
+      const statusBox = document.getElementById('form-status');
+      const submitBtn = document.getElementById('submit-btn');
+
+      statusBox.className = 'status';
+      statusBox.textContent = '';
+
+      if (!selectedBackpack) {
+        statusBox.className = 'status error';
+        statusBox.textContent = 'Please select a backpack before submitting.';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      const templateParams = {
+        customer_name: document.getElementById('customer_name').value,
+        customer_email: document.getElementById('customer_email').value,
+        customer_phone: document.getElementById('customer_phone').value,
+        customer_address: document.getElementById('customer_address').value,
+        backpack_choice: selectedBackpack,
+        to_email: 'kvandeho@cisco.com',
+        cc_email: 'cvandeho@cisco.com'
+      };
+
+      emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+        .then(function() {
+          statusBox.className = 'status success';
+          statusBox.textContent = 'Thank you. Your selection has been submitted successfully.';
+          document.getElementById('backpack-form').reset();
+          document.querySelectorAll('.card').forEach(card => card.classList.remove('selected'));
+          selectedBackpack = '';
+        })
+        .catch(function(error) {
+          console.error('EmailJS error:', error);
+          statusBox.className = 'status error';
+          statusBox.textContent = 'Something went wrong while submitting. Please try again.';
+        })
+        .finally(function() {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Selection';
+        });
+    });
+  </script>
 </body>
 </html>

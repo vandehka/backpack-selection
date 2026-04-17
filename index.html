@@ -9,16 +9,6 @@
       background: #f4f6f8;
     }
 
-    /* 🔵 Top blue bar */
-    .top-bar {
-      background: linear-gradient(135deg, #1BA0D7, #0f6cbd);
-      color: white;
-      text-align: center;
-      padding: 14px;
-      font-size: 16px;
-      font-weight: 600;
-    }
-
     header {
       background: white;
       padding: 20px 30px;
@@ -36,6 +26,27 @@
       max-width: 1100px;
       margin: auto;
       padding: 40px 20px;
+    }
+
+    /* 🔵 Subtle blue box */
+    .info-box {
+      background: linear-gradient(135deg, #1BA0D7, #0f6cbd);
+      color: white;
+      padding: 22px 24px;
+      border-radius: 16px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 28px rgba(15,108,189,0.2);
+    }
+
+    .info-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .info-text {
+      font-size: 14px;
+      opacity: 0.95;
     }
 
     .grid {
@@ -143,17 +154,20 @@
 
 <body>
 
-<!-- 🔵 Blue bar -->
-<div class="top-bar">
-  Please choose a backpack
-</div>
-
 <header>
   <img src="./digital-realty.png" class="logo" alt="Digital Realty">
   <img src="./cisco.png" class="logo" alt="Cisco">
 </header>
 
 <div class="container">
+
+  <!-- 🔵 Nice clean instruction box -->
+  <div class="info-box">
+    <div class="info-title">Select Your Backpack</div>
+    <div class="info-text">
+      Please choose one option below and enter your shipping address to complete your selection.
+    </div>
+  </div>
 
 <form action="https://formspree.io/f/xzdyrrjq" method="POST">
 
@@ -193,7 +207,7 @@
 
   </div>
 
-  <textarea name="Shipping Address" placeholder="Please enter shipping address and submit" rows="4" required></textarea>
+  <textarea name="Shipping Address" placeholder="Please enter your shipping address" rows="4" required></textarea>
 
   <button type="submit">Submit</button>
 

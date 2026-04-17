@@ -1,46 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cisco Backpack Selection</title>
+  <title>Backpack Selection</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #f3f5f7;
-    }
-
-    header {
-      background: #ffffff;
-      padding: 20px 28px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #dde3e8;
-    }
-
-    .brand-logo {
-      height: 38px;
-    }
-
-    .page-wrap {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 30px;
+      padding: 40px;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
-      margin-bottom: 30px;
+      max-width: 1000px;
+      margin: auto;
     }
 
     .card {
       background: white;
       padding: 15px;
-      border-radius: 16px;
+      border-radius: 12px;
       text-align: center;
       cursor: pointer;
       border: 2px solid transparent;
@@ -50,111 +31,74 @@
       border-color: #1BA0D7;
     }
 
-    .image-box {
-      height: 220px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .image-box img {
-      max-height: 100%;
+    img {
       max-width: 100%;
-    }
-
-    .form-wrap {
-      background: white;
-      padding: 20px;
-      border-radius: 16px;
+      height: 200px;
+      object-fit: contain;
     }
 
     textarea {
       width: 100%;
+      max-width: 1000px;
+      display: block;
+      margin: 40px auto 10px;
       padding: 12px;
       border-radius: 8px;
       border: 1px solid #ccc;
     }
 
     button {
-      margin-top: 15px;
-      width: 100%;
-      padding: 14px;
+      display: block;
+      margin: auto;
+      padding: 14px 30px;
       background: #1BA0D7;
       color: white;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       font-size: 16px;
       cursor: pointer;
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <img src="digital-realty.png" class="brand-logo">
-  <img src="cisco.png" class="brand-logo">
-</header>
+<form action="https://formspree.io/f/xzdyrrjq" method="POST">
 
-<div class="page-wrap">
+  <input type="hidden" name="Backpack Choice" id="backpack_choice">
 
   <div class="grid">
     <div class="card" onclick="selectCard(this, 'OGIO Shuttle')">
-      <div class="image-box">
-        <img src="Ogio.png">
-      </div>
-      <p>Core OGIO Shuttle Backpack - Black</p>
+      <img src="Ogio.png">
     </div>
 
     <div class="card" onclick="selectCard(this, 'Dyno')">
-      <div class="image-box">
-        <img src="Dyno.png">
-      </div>
-      <p>Core North Face Dyno - Black</p>
+      <img src="Dyno.png">
     </div>
 
     <div class="card" onclick="selectCard(this, 'Fall Line')">
-      <div class="image-box">
-        <img src="Fallline.png">
-      </div>
-      <p>Core North Face Fall Line - Navy</p>
+      <img src="Fallline.png">
     </div>
 
     <div class="card" onclick="selectCard(this, 'Mercur')">
-      <div class="image-box">
-        <img src="Mercur.png">
-      </div>
-      <p>Mercur Backpack</p>
+      <img src="Mercur.png">
     </div>
 
     <div class="card" onclick="selectCard(this, 'Commuter')">
-      <div class="image-box">
-        <img src="Commuter.png">
-      </div>
-      <p>Core Commuter Backpack - Black</p>
+      <img src="Commuter.png">
     </div>
   </div>
 
-  <div class="form-wrap">
-    <form action="https://formspree.io/f/xzdyrrjq" method="POST">
-      
-      <input type="hidden" name="Backpack Choice" id="backpack_choice">
+  <textarea name="Shipping Address" placeholder="Enter mailing address" required></textarea>
 
-      <label>Shipping Address</label>
-      <textarea name="Shipping Address" rows="4" required></textarea>
+  <button type="submit">Submit</button>
 
-      <button type="submit">Submit Selection</button>
-    </form>
-  </div>
-
-</div>
+</form>
 
 <script>
-  let selected = "";
-
   function selectCard(element, name) {
     document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
     element.classList.add('selected');
-    selected = name;
     document.getElementById('backpack_choice').value = name;
   }
 </script>
